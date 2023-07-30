@@ -1,0 +1,358 @@
+:root {
+    --egyptian-blue: #0a369d;
+    --celtic-blue: #4472ca;
+    --glaucous: #5e7ce2;
+    --jordy-blue: #92b4f4;
+    --columbia-blue: #cfdee7;
+}
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/*
+    2. Remove default margin
+  */
+* {
+    margin: 0;
+}
+
+/*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*
+    5. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/*
+    6. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/*
+    7. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/*
+    8. Create a root stacking context
+  */
+#root,
+#__next {
+    isolation: isolate;
+}
+
+html {
+    height: 100%;
+    user-select: none; /* Standard */
+
+}
+
+body {
+    height: 100%;
+    background-color: var(--glaucous);
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.main-app {
+    width: 870px;
+    height: 560px;
+    border-radius: 20px;
+    background: rgb(34,1,90);
+    background: linear-gradient(0deg, rgba(34,1,90,1) 0%, rgba(64,10,151,1) 50%, rgba(64,10,151,1) 100%);
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.main-app .title-bar {
+    flex: 0 1 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-bar .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.main-app-margin {
+    margin: 0px 64px;
+}
+
+.container .app-name {
+    font-weight: 400;
+    font-size: 2em;
+}
+
+.container .city-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.city-name .map-marker {
+    width: 1em;
+    height: 1em;
+    fill: white;
+}
+
+.container .search-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    height: 100%;
+}
+
+.search-box .search-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+    height: 35px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.search-box .magnify {
+    width: 1.5em;
+    height: 1.5em;
+    fill: white;
+    margin-left: 6px;
+}
+
+.search-box input {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    color: white;
+    outline: none;
+    width: 100%;
+    font-size: .65em;
+    margin-right: 6px;
+}
+
+.flex-equal {
+    flex: 1;
+}
+
+.main-app .weather-section {
+    flex: 1 0 auto;
+}
+
+.main-app .calendar {
+    flex: 0 1 25%;
+}
+
+.weather-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-section #card-stack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.weather-section .card {
+    position: absolute;
+    width: 245px;
+    height: 265px;
+    background: rgb(63,108,205);
+    background: linear-gradient(0deg, rgba(63,108,205,1) 0%, rgba(63,151,229,1) 50%, rgba(72,195,252,1) 100%);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease-in;
+}
+
+.card .temperature {
+    font-weight: 400;
+    font-size: 4em;
+}
+
+.card .temperature > * {
+    user-select: none;
+}
+
+[data-pos="-1"],
+[data-pos="1"] {
+    scale: .8;
+    z-index: 3;
+    filter: blur(5px) brightness(0.8);
+}
+
+[data-pos="-1"] {
+    transform: translateX(-80%);
+    
+}
+
+[data-pos="0"] {
+    z-index: 4;
+}
+
+[data-pos="1"] {
+    transform: translateX(80%);
+}
+
+.calendar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    transition: all .3s ease-in;
+}
+
+.day {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    transition: all .3s ease-in;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.selected {
+    border-radius: 10px;
+    background: linear-gradient(0deg, rgba(87,67,119,1) 0%, rgba(106,86,137,1) 50%, rgba(130,110,163,1) 100%);
+}
+
+.day .date {
+    font-size: 1.5em;
+    flex: 0 1 50%;
+}
+
+.day .month {
+    font-size: .8em;
+    flex: 0 1 30%;
+}
+
+.calendar-btn {
+    width: 120px;
+    height: 30px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-btn.left {
+    transform: translateX(-255%);
+}
+
+.calendar-btn.right {
+    transform: translateX(255%);
+}
+
+.calendar-btn svg {
+    width: 2em;
+    height: 2em;
+    fill: white;
+}
+
+.calendar-btn div {
+    font-size: .8em;
+}
+
+.loader {
+    display: none;
+    z-index: 6;
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+.medium-loader {
+    width: 120px;
+    height: 120px;
+}
+
+.small-loader {
+    width: 60px;
+    height: 60px;
+    border: 8px solid #f3f3f3;
+    /* Light grey */
+    border-top: 8px solid #3498db;
+
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.weather-icon svg {
+    width: 4em;
+    height: 4em;
+    fill: white;
+}
